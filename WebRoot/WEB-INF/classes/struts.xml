@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 修改default.propertiees的默认值 -->
+	<constant name="struts.multipart.maxSize" value="1073741824"></constant>
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="upload" class="sean.snow.FileUploadAction" method="upload">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/jpeg</param>
+				<param name="maximumSize">2097152</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result>success.jsp</result>
+			<!-- 上传文件失败时候返回的结果为input接收关进行处理 -->
+			<result name="input">index.jsp</result>
+		</action>
+		<action name="multipleUploadUsingList" class="sean.snow.FileUploadAction" method="uploadsUsingList">
+			<result>success.jsp</result>	
+		</action>
+	</package>
+</struts>
